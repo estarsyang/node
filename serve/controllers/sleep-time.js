@@ -1,6 +1,5 @@
 const sleepTimeService = require('../service/sleep-time')
-
-
+const utils = require('../utils/util')
 
 module.exports = {
   async list (ctx, next) {
@@ -10,7 +9,7 @@ module.exports = {
   async add (ctx, next) {
     const { body:{user} } = ctx.request
     const params = {
-      user,
+      user: utils.decrypt(user),
       time: new Date().valueOf()
     }
     const list = await sleepTimeService.add(params)

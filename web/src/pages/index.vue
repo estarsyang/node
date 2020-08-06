@@ -2,7 +2,7 @@
   <div class="content">
     <div class="handle">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
-      <mt-button type="primary" class="clock">打卡</mt-button>
+      <mt-button type="primary" class="clock" @click="submit">打卡</mt-button>
     </div>
     
     <div class="list">
@@ -14,7 +14,8 @@
 
 
 <script>
-import {getListApi} from '@/api/card';
+import {getListApi,clockTimeApi} from '@/api/time';
+import {encrypt} from '@/utils/util'
 export default {
   data() {
     return {
@@ -24,6 +25,14 @@ export default {
   methods: {
     getList() {
       getListApi({}).then(res => {
+        console.log(res);
+      })
+    },
+    submit() {
+      console.log(encrypt(this.username));
+      clockTimeApi({
+        user: encrypt(this.username)
+      }).then(res => {
         console.log(res);
       })
     }
