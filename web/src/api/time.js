@@ -1,7 +1,7 @@
 import axios from '@/utils/request'
 
 export function getListApi(params) {
-  return axios.get('/list',{params})
+  return axios.post('/time/list',params)
 }
 
 export function clockTimeApi(params) {

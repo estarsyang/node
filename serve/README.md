@@ -21,3 +21,5 @@ npm i nodemon -D // node文件热更新
   npm install forever -g
   forever xxxx.js
 ```
+
+## rsa 秘钥加密

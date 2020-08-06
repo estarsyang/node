@@ -1,10 +1,10 @@
 const Router = require("koa-router");
-
-const router = new Router()
 const { sleepTime } = require('../controllers')
+const router = new Router()
 
 
-router.get('/list', sleepTime.list)
+
+router.post('/list', sleepTime.list)
 
 router.post('/add', sleepTime.add)
 

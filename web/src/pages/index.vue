@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getList() {
-      getListApi({}).then(res => {
+      getListApi({user:'ddayang'}).then(res => {
         console.log(res);
       })
     },
