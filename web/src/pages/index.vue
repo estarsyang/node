@@ -7,33 +7,44 @@
     
     <div class="list">
       <p>打卡记录</p>
+      <ul class="time-list">
+        <li v-for="item in list" :key="item.time" class="time-item">{{item.clearTime}}</li>
+      </ul>
     </div>
-    
   </div>
 </template>
 
 
 <script>
 import {getListApi,clockTimeApi} from '@/api/time';
+import moment from 'moment'
+ 
 import {encrypt} from '@/utils/util'
 export default {
   data() {
     return {
-      username:''
+      username:'',
+      list: []
     }
   },
   methods: {
     getList() {
       getListApi({user:'ddayang'}).then(res => {
-        console.log(res);
+        this.list = res.map(item => {
+          item.clearTime = moment(item.time - 0).format('YYYY-MM-DD HH:mm:ss')
+          return item
+        })
       })
     },
     submit() {
-      console.log(encrypt(this.username));
       clockTimeApi({
         user: encrypt(this.username)
-      }).then(res => {
-        console.log(res);
+      }).then(() => {
+        this.$toast('打卡成功')
+        this.getList()
+      }).catch(err => {
+        const {message} = err
+        this.$toast(message)
       })
     }
   },
@@ -52,5 +63,9 @@ export default {
   }
   .list {
     margin-top: 24px;
+    .time-item {
+      padding: 2px 0;
+      border-bottom: 1px solid #ddd;
+    }
   }
 </style>

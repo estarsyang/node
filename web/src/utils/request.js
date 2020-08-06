@@ -8,7 +8,12 @@ const instance = axios.create({
 
 instance.interceptors.response.use(response => {
   const res = response.data;
-  return res;
+  const {errcode,data} = res
+  if(errcode === 0) {
+    return data
+  } else {
+    return Promise.reject(res)
+  }
 }, error => {
   // 当服务器出错时统一报错
   MessageBox('提示', '服务器异常，请稍后再试');

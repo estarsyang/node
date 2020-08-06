@@ -1,13 +1,17 @@
 
 import { 
   Button,
-  Field
+  Field,
+  MessageBox,
+  Toast
  } from 'mint-ui';
 
 const uiComponents =  {
-  install(vue) {
-    vue.component(Button.name, Button)
-    vue.component(Field.name, Field)
+  install(Vue) {
+    Vue.component(Button.name, Button)
+    Vue.component(Field.name, Field)
+    Vue.prototype.$toast = Toast;
+    Vue.prototype.$messagebox = MessageBox;
   }
 }
 
