@@ -5,5 +5,5 @@ export function getListApi(params) {
 }
 
 export function clockTimeApi(params) {
-  return axios.post('/add', params)
+  return axios.post('/time/add', params)
 }

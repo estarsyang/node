@@ -24,7 +24,7 @@ module.exports = {
       if(res._id) {
         ctx.body = new ApiModel(null)
       } else {
-        ctx.body = new ApiModel('add fail', 20002)
+        ctx.body = new ApiModel(null, 20002, '打卡失败')
       }
     } else {
       ctx.body = new ApiModel(null, 20003, '参数错误')
