@@ -5,10 +5,8 @@ const { ApiModel, ErrorCode } = require('../lib/response')
 
 module.exports = {
   async list (ctx, next) {
-    const { body:{user} } = ctx.request
-    const list = await sleepTimeService.find({
-      user
-    })
+    const { body:{user,sort={time:-1},pageNumber= 1, pageSize = 10  } } = ctx.request
+    const list = await sleepTimeService.find({user},sort,pageNumber,pageSize)
     ctx.body = new ApiModel(list)
   },
   async add (ctx, next) {

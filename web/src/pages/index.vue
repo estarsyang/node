@@ -7,8 +7,8 @@
       <div><mt-button type="primary" class="clock" @click="getList">查看</mt-button></div>
     </div>
     
-    <div class="list">
-      <p>打卡记录</p>
+    <div class="list" v-if="list.length > 0">
+      <p>打卡记录  <a style="color: #26a2ff" @click="goMore">查看更多</a></p>
       <ul class="time-list">
         <li v-for="item in list" :key="item.time" class="time-item">{{item.clearTime}}</li>
       </ul>
@@ -25,14 +25,25 @@ import {encrypt} from '@/utils/util'
 export default {
   data() {
     return {
-      username:'',
-      list: []
+      username:'ddayang',
+      list: [],
+      query: {
+        pageNumber: 1,
+        pageSize:2,
+        sort: {
+          time: -1
+        }
+      },
+      disableHand: {
+        previous: false,
+        next: false
+      }
     }
   },
   methods: {
     getList() {
       if(!this.valid()) return
-      getListApi({user:this.username}).then(res => {
+      getListApi({user:this.username, ...this.query}).then(res => {
         this.list = res.map(item => {
           item.clearTime = moment(item.time - 0).format('YYYY-MM-DD HH:mm:ss')
           return item
@@ -58,6 +69,9 @@ export default {
         return false
       }
       return true
+    },
+    goMore() {
+      this.$router.push('/more')
     }
   },
   created() {

@@ -12,7 +12,8 @@
     "core-js": "^3.6.5",
     "mint-ui": "^2.2.13",
     "moment": "^2.27.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.4.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
