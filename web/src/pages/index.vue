@@ -2,7 +2,9 @@
   <div class="content">
     <div class="handle">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
-      <mt-button type="primary" class="clock" @click="submit">打卡</mt-button>
+      
+      <div><mt-button type="primary" class="clock" @click="submit">打卡</mt-button></div>
+      <div><mt-button type="primary" class="clock" @click="getList">查看</mt-button></div>
     </div>
     
     <div class="list">
@@ -29,7 +31,8 @@ export default {
   },
   methods: {
     getList() {
-      getListApi({user:'ddayang'}).then(res => {
+      if(!this.valid()) return
+      getListApi({user:this.username}).then(res => {
         this.list = res.map(item => {
           item.clearTime = moment(item.time - 0).format('YYYY-MM-DD HH:mm:ss')
           return item
@@ -37,6 +40,8 @@ export default {
       })
     },
     submit() {
+      if(!this.valid()) return
+
       clockTimeApi({
         user: encrypt(this.username)
       }).then(() => {
@@ -46,10 +51,16 @@ export default {
         const {message} = err
         this.$toast(message)
       })
+    },
+    valid() {
+      if(!this.username) {
+        this.$toast('请输入用户名称')
+        return false
+      }
+      return true
     }
   },
   created() {
-    this.getList()
   }
 }
 </script>
