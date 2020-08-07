@@ -71,7 +71,7 @@ export default {
       return true
     },
     goMore() {
-      this.$router.push('/more')
+      this.$router.push({ path: 'more', query: { user: this.username }})
     }
   },
   created() {
