@@ -25,7 +25,7 @@ import {encrypt} from '@/utils/util'
 export default {
   data() {
     return {
-      username:'ddayang',
+      username:'',
       list: [],
       query: {
         pageNumber: 1,
